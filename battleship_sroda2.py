@@ -332,34 +332,18 @@ def phase_triple(board):
 
 def shoot_ships(enemy_board, board):
     draw_board(board)        # player shoots ships of the enemy -> output is board 3/ board 4
-    guess_ship_row_raw = (input("Guess row 1-5: "))
-    while guess_ship_row_raw not in coordinates_numbers:
-        print("enter valid number")
-        guess_ship_row_raw = (input("1-5: "))
-    guess_ship_row = int(guess_ship_row_raw)*2
-
-    guess_ship_col_raw = (input("Guess column A-E: "))
-    while guess_ship_col_raw not in coordinates_letters:
-        print('enter valid letter A-E')
-        guess_ship_col_raw = (input("A-E: "))
-    if guess_ship_col_raw == "A":
-        guess_ship_col_raw = 2
-    elif guess_ship_col_raw == "B":
-        guess_ship_col_raw = 4
-    elif guess_ship_col_raw == "C":
-        guess_ship_col_raw = 6
-    elif guess_ship_col_raw == "D":
-        guess_ship_col_raw = 8
-    elif guess_ship_col_raw == "E":
-        guess_ship_col_raw = 10
-    guess_ship_col = int(guess_ship_col_raw)
-    board[guess_ship_row][guess_ship_col] = ship_one
-    os.system("clear")
-
+    number, letter = check_input(board)
+    guess_ship_row = int(number)*2
+    for key in coordinates:
+        if letter == key:
+            guess_ship_col = coordinates[key]
+        board[guess_ship_row][guess_ship_col] = ship_one
+        os.system("clear")
+    
     if (enemy_board[guess_ship_row][guess_ship_col]) == ship_one:      # marking  good shots
         print("You sank you enemy's ship!")
-        board[guess_ship_row][guess_ship_col] = u"\u2620"
-        enemy_board[guess_ship_row][guess_ship_col] = u"\u2620"
+        board[guess_ship_row][guess_ship_col] = sunk
+        enemy_board[guess_ship_row][guess_ship_col] = sunk
     elif (enemy_board[guess_ship_row][guess_ship_col]) == u"\U0001F6E5":      # marking  good shots
         print("You sank you enemy's ship!")
         board[guess_ship_row][guess_ship_col] = u"\u2620"
@@ -368,11 +352,10 @@ def shoot_ships(enemy_board, board):
         print("You sank you enemy's ship!")
         board[guess_ship_row][guess_ship_col] = u"\u2620"
         enemy_board[guess_ship_row][guess_ship_col] = u"\u2620"
-
     else:
         print("You missed!")                                 # marking missed shots
-        board[guess_ship_row][guess_ship_col] = u"\u2717"
-        enemy_board[guess_ship_row][guess_ship_col] = u"\u2717"
+        board[guess_ship_row][guess_ship_col] = miss
+        enemy_board[guess_ship_row][guess_ship_col] = miss
 
 
 def phase_two_player_one(enemy_board, board):  # shooting - player's one turn + output
@@ -395,22 +378,22 @@ def welcome(board):
     draw_board(board)
     print("Put your 3 single ships on the board")
     i = 1
-    while i in range(0, 4):
+    while i in range(0, 2):
         phase_one(board)
         i = i+1
-    print("Put 2 double ships on the board")
-    k = 1
-    while k in range(0, 3):
-        phase_double(board)
-        k = k+1
-    print("Put 1 triple ship on the board")
-    l = 1
-    while l in range(0, 2):
-        phase_triple(board)
-        l = l+1
-    os.system('clear')
-    print("\033[8;15HThose are your ships:")
-    draw_board(board)
+    # print("Put 2 double ships on the board")
+    # k = 1
+    # while k in range(0, 3):
+    #     phase_double(board)
+    #     k = k+1
+    # print("Put 1 triple ship on the board")
+    # l = 1
+    # while l in range(0, 2):
+    #     phase_triple(board)
+    #     l = l+1
+    # os.system('clear')
+    # print("\033[8;15HThose are your ships:")
+    # draw_board(board)
 
 
 def ending():
@@ -440,6 +423,8 @@ def gameplay():
 
 
 def human_game_mode():
+    global player_one
+    global player_two
     print(Fore.RESET)
     os.system('clear')
     print("First player turn\n ")
@@ -461,6 +446,11 @@ def human_game_mode():
         battleship_main()
     else:
         exit()
+
+
+
+
+
 
 # - - - - - - - - - - - - - - - - - - gameplay
 
