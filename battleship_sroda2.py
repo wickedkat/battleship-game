@@ -135,24 +135,23 @@ def choice_of_enemy():
         print("Choose better next time")
         exit()
 
-
-
 def define_ships(board):             # putting ships on a board
     print("Enter row number 1-10")
-    ship_row_raw = (input("1-10: "))
-    while ship_row_raw not in coordinates_numbers:
+    number = (input("1-10: "))
+    while number not in coordinates_numbers:
         print("enter valid number")
-        ship_row_raw = (input("1-10: "))
-    ship_row = int(ship_row_raw)*2
+        number = (input("1-10: "))
     print('enter a letter A-J')
-    ship_col_raw = input("A-J: ")
-    while ship_col_raw not in coordinates_letters:
+    letter = input("A-J: ")
+    while letter not in coordinates_letters:
         print('enter valid letter A-J')
-        ship_col_raw = input("A-J: ")
+        letter = input("A-J: ")
+    ship_row = int(number)*2
     for key in coordinates:
-        if ship_col_raw == key:
+        if letter == key:
             ship_col = coordinates[key]
     board[ship_row][ship_col] = ship_one
+    
 
 def define_doubleships(board):             # putting ships on a board
     print('Enter row number 1-10')
@@ -258,10 +257,10 @@ def define_tripleships(board):             # putting ships on a board
             board[ship_row][ship_col+2] = u"\U0001F6F3"
             board[ship_row][ship_col+4] = u"\U0001F6F3"
 
-def phase_one(board):               #player puts ships on the board and gets them printed -> the output is board 1 or board 2
-        define_ships(board)
-        os.system("clear")
-        draw_board(board)
+def phase_one(board):
+    define_ships(board)               #player puts ships on the board and gets them printed -> the output is board 1 or board 2
+    os.system("clear")
+    draw_board(board)
         
 
 def phase_double(board):
