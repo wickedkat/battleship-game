@@ -305,6 +305,43 @@ def define_tripleships(board):
             board[ship_row][ship_col+2] = ship_one
             board[ship_row][ship_col+4] = ship_one
 
+# define one-masted ships by computer
+
+
+def define_comp_ships(board):
+    i = 0
+    while i < 4:
+        ship_row = random.randrange(2, 21, 2)
+        ship_col = random.randrange(2, 21, 2)
+        if board[ship_row][ship_col] == ship_one:
+            ship_row = random.randrange(2, 21, 2)
+            ship_col = random.randrange(2, 21, 2)
+        else:
+            board[ship_row][ship_col] = ship_one
+            i += 1
+
+# define two-masted ships by computer
+def define_comp_doubleships(board):
+    i = 0
+    while i < 4:
+        ship_row = random.randrange(2, 19, 2)
+        ship_col = random.randrange(2, 19, 2)
+        ship_row1 = ship_row + 2
+        ship_col1 = ship_col + 2
+        if board[ship_row][ship_col] == ship_one or board[ship_row1][ship_col] == ship_one or board[ship_row][ship_col1] == ship_one:
+            ship_row = random.randrange(2, 19, 2)
+            ship_col = random.randrange(2, 19, 2)
+        else:
+            los = random.randint(1,2)
+            if los == 1:
+                    board[ship_row][ship_col] = ship_one
+                    board[ship_row][ship_col1] = ship_one
+                    i += 1
+            else:
+                    board[ship_row][ship_col] = ship_one
+                    board[ship_row1][ship_col] = ship_one
+                    i += 1
+
 # player puts one-masted ships on the board and gets them printed -> the output is board 1 or board 2
 
 
@@ -339,7 +376,7 @@ def shoot_ships(enemy_board, board):
             guess_ship_col = coordinates[key]
         board[guess_ship_row][guess_ship_col] = ship_one
         os.system("clear")
-    
+
     if (enemy_board[guess_ship_row][guess_ship_col]) == ship_one:      # marking  good shots
         print("You sank you enemy's ship!")
         board[guess_ship_row][guess_ship_col] = sunk
@@ -442,19 +479,23 @@ def human_game_mode():
     gameplay()
     escape = input(Fore.RED + "Do you want to play again?\n Press 1 for YES or press n to exit".center(80))
     print(Style.RESET_ALL)
+
     while escape in escape_game:
         battleship_main()
     else:
         exit()
 
 
-
-
+def comp_game_mode():
+    global player_one
+    print(Fore.RESET)
+    os.system('clear')
+    print("First player turn\n ")
+    player_one = input("What is your name?: ")
+    welcome(board_one)
 
 
 # - - - - - - - - - - - - - - - - - - gameplay
-
-
 print(" ")
 print(Fore.RED + "Welcome to BattleShip Game!\n".center(80))
 print(Fore.RESET)
