@@ -93,9 +93,11 @@ board_four = [[' ',' ', 'A',' ', 'B',' ', 'C',' ', 'D',' ', 'E',' ', 'F',' ', 'G
     ['0','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|'],
     [' ','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-']]
 
+coordinates = {"A": 2, "B": 4, "C": 6, "D" : 8, "E": 10, "F": 12, "G": 14, "H": 16, "I": 18, "J": 20}
 coordinates_numbers = ['1','2','3','4','5','6','7','8','9','10']
 coordinates_letters = ['A','B','C','D','E','F','G','H','I','J']
 escape_game = ["1"]
+
 
 
 
@@ -107,6 +109,26 @@ def draw_board(board):
     for s in board:
         print(*s)
     print(Style.RESET_ALL)
+
+def instructions():
+    with open("instructions.txt", "r") as file:
+        reader = file.read()
+        print(reader)
+
+def choice_of_enemy():
+    print("""You can play with computer or second player. 
+    Press C to play with computer
+    Press P to play with second player""")
+    game_mode = input()
+    if game_mode == "C":
+        comp_game_mode()
+    elif game_mode == "P":
+        human_game_mode()
+    else:
+        print("Choose better next time")
+        exit()
+
+
 
 def define_ships(board):             # putting ships on a board
     print("Enter row number 1-10")
@@ -120,27 +142,9 @@ def define_ships(board):             # putting ships on a board
     while ship_col_raw not in coordinates_letters:
         print('enter valid letter A-J')
         ship_col_raw = input("A-J: ")
-    if ship_col_raw == "A":
-        ship_col_raw = 2
-    elif ship_col_raw == "B":
-        ship_col_raw = 4
-    elif ship_col_raw == "C":
-        ship_col_raw =6
-    elif ship_col_raw == "D":
-        ship_col_raw =8
-    elif ship_col_raw == "E":
-        ship_col_raw =10
-    elif ship_col_raw == "F":
-        ship_col_raw = 12
-    elif ship_col_raw == "G":
-        ship_col_raw =14
-    elif ship_col_raw == "H":
-        ship_col_raw =16
-    elif ship_col_raw == "I":
-        ship_col_raw =18
-    elif ship_col_raw == "J":
-        ship_col_raw =20
-    ship_col = int(ship_col_raw)
+    for key in coordinates:
+        if ship_col_raw == key:
+            ship_col = coordinates[key]
     board[ship_row][ship_col] = u"\u26F5"
 
 def define_doubleships(board):             # putting ships on a board
@@ -343,11 +347,7 @@ def welcome(board):
     os.system('clear')
     print("\033[8;15HThose are your ships:")
     draw_board(board)
-def instructions():
-    file = open("instructions.txt", "r")
-    cont = file.read()
-    print(cont)
-    file.close()
+
 
 def ending():
     print("\033[8;15H")
