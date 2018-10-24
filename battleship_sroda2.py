@@ -3,6 +3,7 @@ from colorama import init
 from colorama import Fore, Back, Style
 import os
 import time
+import random
 
 board_one = [['  ',' ', 'A',' ', 'B',' ', 'C',' ', 'D',' ', 'E',' ', 'F',' ', 'G',' ', 'H',' ', 'I',' ', 'J',' '],    #player1 ships
     ['  ','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-'],  
@@ -25,7 +26,7 @@ board_one = [['  ',' ', 'A',' ', 'B',' ', 'C',' ', 'D',' ', 'E',' ', 'F',' ', 'G
     [' 9','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|'],
     ['  ','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-'],
     ['10','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|'],
-    [' ','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-']]
+    ['  ','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-']]
 board_two = [['  ',' ', 'A',' ', 'B',' ', 'C',' ', 'D',' ', 'E',' ', 'F',' ', 'G',' ', 'H',' ', 'I',' ', 'J',' '],    #player2 ships/computer
     ['  ','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-'],  
     [' 1','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|'],
@@ -47,7 +48,7 @@ board_two = [['  ',' ', 'A',' ', 'B',' ', 'C',' ', 'D',' ', 'E',' ', 'F',' ', 'G
     [' 9','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|'],
     ['  ','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-'],
     ['10','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|'],
-    [' ','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-']]
+    ['  ','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-']]
 board_three = [['  ',' ', 'A',' ', 'B',' ', 'C',' ', 'D',' ', 'E',' ', 'F',' ', 'G',' ', 'H',' ', 'I',' ', 'J',' '],    #player1 ships
     ['  ','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-', '-','-'],  
     [' 1','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|', ' ','|'],
@@ -97,6 +98,7 @@ board_four = [['  ',' ', 'A',' ', 'B',' ', 'C',' ', 'D',' ', 'E',' ', 'F',' ', '
 coordinates = {"A": 2, "B": 4, "C": 6, "D" : 8, "E": 10, "F": 12, "G": 14, "H": 16, "I": 18, "J": 20}
 coordinates_numbers = ['1','2','3','4','5','6','7','8','9','10']
 coordinates_letters = ['A','B','C','D','E','F','G','H','I','J']
+orientation = ['V', 'H']
 escape_game = ["1"]
 ship_one = u"\u26F5"
 ship_two = u"\U0001F6E5"
@@ -156,56 +158,29 @@ def define_ships(board):
         if letter == key:
             ship_col = coordinates[key]
     board[ship_row][ship_col] = ship_one
-    
+    return ship_row, ship_col
 
-def define_doubleships(board):             # putting ships on a board
-    print('Enter row number 1-10')
-    ship_row_raw = (input("1-10: "))
-    while ship_row_raw not in coordinates_numbers:
-        print("enter valid number")
-        ship_row_raw = (input("1-10: "))
-    ship_row = int(ship_row_raw)*2
-    print('enter a letter A-J')
-    ship_col_raw = input("A-J: ")
-    while ship_col_raw not in coordinates_letters:
-        print('enter valid letter A-J')
-        ship_col_raw = input("A-J: ")
-    if ship_col_raw == "A":
-        ship_col_raw = 2
-    elif ship_col_raw == "B":
-        ship_col_raw = 4
-    elif ship_col_raw == "C":
-        ship_col_raw =6
-    elif ship_col_raw == "D":
-        ship_col_raw =8
-    elif ship_col_raw == "E":
-        ship_col_raw =10
-    elif ship_col_raw == "F":
-        ship_col_raw = 12
-    elif ship_col_raw == "G":
-        ship_col_raw =14
-    elif ship_col_raw == "H":
-        ship_col_raw =16
-    elif ship_col_raw == "I":
-        ship_col_raw =18
-    elif ship_col_raw == "J":
-        ship_col_raw =20
-    ship_col = int(ship_col_raw)
-    board[ship_row][ship_col] = u"\U0001F6E5"
-    draw_board(board)
-    orient = input ( "If you want a horizontal-oriented ship press 'q', if you want a vertical-oriented ship press 1: ")
-    if orient in coordinates_numbers:
-        if ship_row == 20:
-            board[ship_row-2][ship_col] = u"\U0001F6E5"
-        else:
-            board[ship_row+2][ship_col] = u"\U0001F6E5"
-    else:
-        if ship_col ==20:
-            board[ship_row][ship_col-2] = u"\U0001F6E5"
-        else:
-            board[ship_row][ship_col+2] = u"\U0001F6E5"
+def define_doubleships(board):             
+        ship_row, ship_col = define_ships(board)
+        draw_board(board)
+        orient = input("""Choose orientation of two-masted ship:
+        (or it will be random)
+        (V)ertically
+        (H)orizontally: """).upper()
+        if orient not in orientation:
+                orient = random.choice(orientation)
+        if orient == "V":
+                if ship_row == 20:
+                        board[ship_row-2][ship_col] = ship_one
+                else:
+                        board[ship_row+2][ship_col] = ship_one
+        elif orient == "H":
+                if ship_col == 20:
+                        board[ship_row][ship_col-2] = ship_one
+                else:
+                        board[ship_row][ship_col+2] = ship_one
 
-def define_tripleships(board):             # putting ships on a board
+def define_tripleships(board):             
     print('Enter row number 1-10')
     ship_row_raw = (input("1-10: "))
     while ship_row_raw not in coordinates_numbers:
