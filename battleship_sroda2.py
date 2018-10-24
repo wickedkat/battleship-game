@@ -87,10 +87,6 @@ def instructions():
 
 
 def choice_of_enemy():
-    board_one = [x[:] for x in board_primal]
-    board_two = [x[:] for x in board_primal]
-    board_three = [x[:] for x in board_primal]
-    board_four = [x[:] for x in board_primal]
     print("""You can play with computer or second player. 
     Press C to play with computer
     Press P to play with second player""")
@@ -450,12 +446,7 @@ def human_game_mode():
     print(Fore.RESET)
     os.system('clear')
     gameplay()
-    escape = input(Fore.RED + "Do you want to play again?\n Press 1 for YES or press n to exit".center(80))
-    print(Style.RESET_ALL)
-    while escape in escape_game:
-        choice_of_enemy()
-    else:
-        exit()
+
 
 # game mode with computer
 
@@ -473,12 +464,7 @@ def comp_game_mode():
     print(Fore.RESET)
     os.system('clear')
     gameplay_comp()
-    escape = input(Fore.RED + "Do you want to play again?\n Press 1 for YES or press n to exit".center(80))
-    print(Style.RESET_ALL)
-    while escape in escape_game:
-        choice_of_enemy()
-    else:
-        exit()
+
 
 
 # - - - - - - - - - - - - - - - - - - gameplay
@@ -488,26 +474,6 @@ print(Fore.RESET)
 instructions()
 input(Fore.BLUE + "Press enter to start game".center(80))
 choice_of_enemy()
+print("Thank you for playing".center(80))
+exit()
 
-
-# print(Fore.RESET)
-# os.system('clear')
-# print("\033[3;15HFirst player turn\n")
-# player_one = input("What is your name?: ")
-# welcome(board_one)
-# input(Fore.BLUE + "\033[3;15HPress enter to continue and invite second player: ")
-# print(Fore.RESET)
-# os.system('clear')
-# print("\033[3;15HSecond player turn\n ")
-# player_two = input("What is your name?: ")
-# welcome(board_two)
-# input(Fore.RED + "\033[3;15HPress enter to start the battle: ")
-# print(Fore.RESET)
-# os.system('clear')
-# gameplay()
-# escape = input(Fore.RED + "Do you want to play again?\n Press 1 for YES or press n to exit".center(80))
-# print(Style.RESET_ALL)
-# while escape in escape_game:
-#     battleship_main()
-# else:
-#     exit()
