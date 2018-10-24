@@ -353,11 +353,11 @@ def define_comp_tripleships(board):
         ship_row2 = ship_row + 4
         ship_col2 = ship_col + 4
         if board[ship_row][ship_col] == ship_one or board[ship_row1][ship_col] == ship_one or board[ship_row2][ship_col] == ship_one:
-            ship_row = random.randrange(2, 19, 2)
-            ship_col = random.randrange(2, 19, 2)
+            ship_row = random.randrange(2, 17, 2)
+            ship_col = random.randrange(2, 17, 2)
         elif board[ship_row][ship_col] == ship_one or board[ship_row][ship_col1] == ship_one or board[ship_row][ship_col2] == ship_one:
-            ship_row = random.randrange(2, 19, 2)
-            ship_col = random.randrange(2, 19, 2)
+            ship_row = random.randrange(2, 17, 2)
+            ship_col = random.randrange(2, 17, 2)
         else:
             los = random.randint(1,2)
             if los == 1:
@@ -395,6 +395,7 @@ def phase_triple(board):
     os.system("clear")
     draw_board(board)
 
+# shoot ship define - player
 
 def shoot_ships(enemy_board, board):
     draw_board(board)        # player shoots ships of the enemy -> output is board 3/ board 4
@@ -423,6 +424,29 @@ def shoot_ships(enemy_board, board):
         board[guess_ship_row][guess_ship_col] = miss
         enemy_board[guess_ship_row][guess_ship_col] = miss
 
+# shoot ship - define - comp
+def shoot_ships_comp(enemy_board, board):         
+    i = 0
+    while i < 1:
+        guess_ship_row = random.randrange(2, 21, 2)
+        guess_ship_col = random.randrange(2, 21, 2)
+        if enemy_board[guess_ship_row][guess_ship_col] == miss or enemy_board[guess_ship_row][guess_ship_col] == sunk:
+            guess_ship_row = random.randrange(2, 21, 2)
+            guess_ship_col = random.randrange(2, 21, 2)
+        else:
+            if (enemy_board[guess_ship_row][guess_ship_col]) == ship_one: 
+                print("I sank your ship!")
+                board[guess_ship_row][guess_ship_col] = sunk
+                enemy_board[guess_ship_row][guess_ship_col] = sunk
+                i += 1
+            else:
+                print("I missed!")                                 # marking missed shots
+                board[guess_ship_row][guess_ship_col] = miss
+                enemy_board[guess_ship_row][guess_ship_col] = miss
+                i += 1
+
+
+# shoot ships player one
 
 def phase_two_player_one(enemy_board, board):  # shooting - player's one turn + output
     print(player_one, ", your turn!")
@@ -431,6 +455,7 @@ def phase_two_player_one(enemy_board, board):  # shooting - player's one turn + 
     time.sleep(3)
     os.system('clear')
 
+#shoot ships player two
 
 def phase_two_player_two(enemy_board, board):  # shooting - player's two turn + output
     print(player_two, ", your turn!")
@@ -485,6 +510,9 @@ def gameplay():
     os.system('clear')
     ending()
 
+
+def gameplay_comp()
+
 # game mode with second player
 
 
@@ -525,7 +553,9 @@ def comp_game_mode():
     define_comp_ships(board_two)
     define_comp_doubleships(board_two)
     define_comp_tripleships(board_two)
-    
+    input(Fore.RED + "\033[3;15HPress enter to start the battle: ")
+    print(Fore.RESET)
+    os.system('clear')
 
 
 # - - - - - - - - - - - - - - - - - - gameplay
