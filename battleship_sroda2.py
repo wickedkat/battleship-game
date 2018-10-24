@@ -135,17 +135,22 @@ def choice_of_enemy():
         print("Choose better next time")
         exit()
 
-def define_ships(board):             # putting ships on a board
-    print("Enter row number 1-10")
-    number = (input("1-10: "))
-    while number not in coordinates_numbers:
-        print("enter valid number")
+def check_input(board):
+        print("Enter row number 1-10")
         number = (input("1-10: "))
-    print('enter a letter A-J')
-    letter = input("A-J: ")
-    while letter not in coordinates_letters:
-        print('enter valid letter A-J')
+        while number not in coordinates_numbers:
+                print("enter valid number")
+                number = (input("1-10: "))
+        print('enter a letter A-J')
         letter = input("A-J: ")
+        while letter not in coordinates_letters:
+                print('enter valid letter A-J')
+                letter = input("A-J: ")
+        return number, letter
+
+
+def define_ships(board):             
+    number, letter = check_input(board)
     ship_row = int(number)*2
     for key in coordinates:
         if letter == key:
