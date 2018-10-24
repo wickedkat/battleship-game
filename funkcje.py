@@ -70,27 +70,34 @@ def draw_board(board):
     print(Style.RESET_ALL)
 
 
-def define_comp_doubleships(board):
+def define_comp_tripleships(board):
     i = 0
     while i < 4:
-        ship_row = random.randrange(2, 19, 2)
-        ship_col = random.randrange(2, 19, 2)
+        ship_row = random.randrange(2, 17, 2)
+        ship_col = random.randrange(2, 17, 2)
         ship_row1 = ship_row + 2
         ship_col1 = ship_col + 2
-        if board[ship_row][ship_col] == ship_one or board[ship_row1][ship_col] == ship_one or board[ship_row][ship_col1] == ship_one:
+        ship_row2 = ship_row + 4
+        ship_col2 = ship_col + 4
+        if board[ship_row][ship_col] == ship_one or board[ship_row1][ship_col] == ship_one or board[ship_row2][ship_col] == ship_one:
+            ship_row = random.randrange(2, 19, 2)
+            ship_col = random.randrange(2, 19, 2)
+        elif board[ship_row][ship_col] == ship_one or board[ship_row][ship_col1] == ship_one or board[ship_row][ship_col2] == ship_one:
             ship_row = random.randrange(2, 19, 2)
             ship_col = random.randrange(2, 19, 2)
         else:
             los = random.randint(1,2)
             if los == 1:
                     board[ship_row][ship_col] = ship_one
-                    board[ship_row][ship_col1] = ship_one
+                    board[ship_row1][ship_col] = ship_one
+                    board[ship_row2][ship_col] = ship_one
                     i += 1
             else:
                     board[ship_row][ship_col] = ship_one
-                    board[ship_row1][ship_col] = ship_one
+                    board[ship_row][ship_col1] = ship_one
+                    board[ship_row][ship_col2] = ship_one
                     i += 1
 
 
-define_comp_doubleships(board_four)
+define_comp_tripleships(board_four)
 draw_board(board_four)
