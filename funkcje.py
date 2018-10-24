@@ -48,6 +48,9 @@ board_four = [['  ', ' ', 'A', ' ', 'B', ' ', 'C', ' ', 'D', ' ', 'E', ' ', 'F',
               ['10', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
                   '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|'],
               ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']]
+board_three = [x[:] for x in board_four]
+
+
 # variables
 
 coordinates = {"A": 2, "B": 4, "C": 6, "D": 8, "E": 10, "F": 12, "G": 14, "H": 16, "I": 18, "J": 20}
@@ -101,3 +104,4 @@ def define_comp_tripleships(board):
 
 define_comp_tripleships(board_four)
 draw_board(board_four)
+draw_board(board_three)
