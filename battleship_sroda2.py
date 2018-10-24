@@ -5,48 +5,50 @@ import os
 import time
 import random
 
-board_primal = [['  ', ' ', 'A', ' ', 'B', ' ', 'C', ' ', 'D', ' ', 'E', ' ', 'F', ' ', 'G', ' ', 'H', ' ', 'I', ' ', 'J', ' '],  # player1 ships
-             ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+board_primal = [['  ', ' ', 'A', ' ', 'B', ' ', 'C', ' ', 'D', ' ', 'E', ' ',
+                'F', ' ', 'G', ' ', 'H', ' ', 'I', ' ', 'J', ' '],  # player1 ships
+                ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
                  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
-             [' 1', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
+                [' 1', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
                  '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|'],
-             ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
                  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
-             [' 2', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
+                [' 2', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
                  '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|'],
-             ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
                  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
-             [' 3', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
+                [' 3', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
                  '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|'],
-             ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
                  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
-             [' 4', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
+                [' 4', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
                  '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|'],
-             ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
                  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
-             [' 5', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
+                [' 5', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
                  '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|'],
-             ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
                  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
-             [' 6', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
+                [' 6', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
                  '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|'],
-             ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
                  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
-             [' 7', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
+                [' 7', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
                  '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|'],
-             ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
                  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
-             [' 8', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
+                [' 8', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
                  '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|'],
-             ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
                  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
-             [' 9', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
+                [' 9', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
                  '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|'],
-             ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
                  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
-             ['10', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
+                ['10', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ',
                  '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|'],
-             ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']]
+                ['  ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+                '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']]
 board_one = [x[:] for x in board_primal]
 board_two = [x[:] for x in board_primal]
 board_three = [x[:] for x in board_primal]
@@ -58,7 +60,6 @@ coordinates = {"A": 2, "B": 4, "C": 6, "D": 8, "E": 10, "F": 12, "G": 14, "H": 1
 coordinates_numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 coordinates_letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
 orientation = ['V', 'H']
-escape_game = ["1"]
 ship_one = u"\u26F5"
 ship_two = u"\U0001F6E5"
 ship_three = u"\U0001F6F3"
@@ -69,8 +70,7 @@ sunk = u"\u2620"
 # - - - - - - - - - - - - - - - - - - - - - def functions
 # drawing board
 def draw_board(board):
-    print(Style.BRIGHT)  # showing board in 5 lines
-    print(Back.CYAN)
+    print(Style.BRIGHT)
     for s in board:
         print(*s)
     print(Style.RESET_ALL)
@@ -87,7 +87,7 @@ def instructions():
 
 
 def choice_of_enemy():
-    print("""You can play with computer or second player. 
+    print("""You can play with computer or second player.
     Press C to play with computer
     Press P to play with second player""")
     game_mode = input()
@@ -200,28 +200,35 @@ def define_comp_ships(board):
             i += 1
 
 # define two-masted ships by computer
+
+
 def define_comp_doubleships(board):
     i = 0
-    while i < 2:
+    while i < 3:
         ship_row = random.randrange(2, 19, 2)
         ship_col = random.randrange(2, 19, 2)
         ship_row1 = ship_row + 2
         ship_col1 = ship_col + 2
-        if board[ship_row][ship_col] == ship_one or board[ship_row1][ship_col] == ship_one or board[ship_row][ship_col1] == ship_one:
+        if board[ship_row][ship_col] == ship_one or board[ship_row1][ship_col] == ship_one:
+            ship_row = random.randrange(2, 19, 2)
+            ship_col = random.randrange(2, 19, 2)
+        elif board[ship_row][ship_col] == ship_one or board[ship_row][ship_col1] == ship_one:
             ship_row = random.randrange(2, 19, 2)
             ship_col = random.randrange(2, 19, 2)
         else:
-            los = random.randint(1,2)
+            los = random.randint(1, 2)
             if los == 1:
-                    board[ship_row][ship_col] = ship_one
-                    board[ship_row][ship_col1] = ship_one
-                    i += 1
+                board[ship_row][ship_col] = ship_one
+                board[ship_row][ship_col1] = ship_one
+                i += 1
             else:
-                    board[ship_row][ship_col] = ship_one
-                    board[ship_row1][ship_col] = ship_one
-                    i += 1
+                board[ship_row][ship_col] = ship_one
+                board[ship_row1][ship_col] = ship_one
+                i += 1
 
 # define three-masted ships by computer
+
+
 def define_comp_tripleships(board):
     i = 0
     while i < 1:
@@ -238,17 +245,17 @@ def define_comp_tripleships(board):
             ship_row = random.randrange(2, 17, 2)
             ship_col = random.randrange(2, 17, 2)
         else:
-            los = random.randint(1,2)
+            los = random.randint(1, 2)
             if los == 1:
-                    board[ship_row][ship_col] = ship_one
-                    board[ship_row1][ship_col] = ship_one
-                    board[ship_row2][ship_col] = ship_one
-                    i += 1
+                board[ship_row][ship_col] = ship_one
+                board[ship_row1][ship_col] = ship_one
+                board[ship_row2][ship_col] = ship_one
+                i += 1
             else:
-                    board[ship_row][ship_col] = ship_one
-                    board[ship_row][ship_col1] = ship_one
-                    board[ship_row][ship_col2] = ship_one
-                    i += 1
+                board[ship_row][ship_col] = ship_one
+                board[ship_row][ship_col1] = ship_one
+                board[ship_row][ship_col2] = ship_one
+                i += 1
 
 # player puts one-masted ships on the board and gets them printed -> the output is board 1 or board 2
 
@@ -275,6 +282,7 @@ def phase_triple(board):
     draw_board(board)
 
 # shoot ship define - player
+
 
 def shoot_ships(enemy_board, board):
     draw_board(board)        # player shoots ships of the enemy -> output is board 3/ board 4
@@ -304,7 +312,9 @@ def shoot_ships(enemy_board, board):
         enemy_board[guess_ship_row][guess_ship_col] = miss
 
 # shoot ship - define - comp
-def shoot_ships_comp(enemy_board, board):         
+
+
+def shoot_ships_comp(enemy_board, board):
     i = 0
     while i < 1:
         guess_ship_row = random.randrange(2, 21, 2)
@@ -313,7 +323,7 @@ def shoot_ships_comp(enemy_board, board):
             guess_ship_row = random.randrange(2, 21, 2)
             guess_ship_col = random.randrange(2, 21, 2)
         else:
-            if (enemy_board[guess_ship_row][guess_ship_col]) == ship_one: 
+            if (enemy_board[guess_ship_row][guess_ship_col]) == ship_one:
                 print("I sank your ship!")
                 board[guess_ship_row][guess_ship_col] = sunk
                 enemy_board[guess_ship_row][guess_ship_col] = sunk
@@ -334,7 +344,8 @@ def phase_two_player_one(enemy_board, board):  # shooting - player's one turn + 
     time.sleep(3)
     os.system('clear')
 
-#shoot ships player two
+# shoot ships player two
+
 
 def phase_two_player_two(enemy_board, board):  # shooting - player's two turn + output
     print(player_two, ", your turn!")
@@ -343,7 +354,8 @@ def phase_two_player_two(enemy_board, board):  # shooting - player's two turn + 
     time.sleep(3)
     os.system('clear')
 
-#shoot ships phase - computer
+# shoot ships phase - computer
+
 
 def phase_two_comp(enemy_board, board):
     print("My turn!")
@@ -354,28 +366,30 @@ def phase_two_comp(enemy_board, board):
 
 # putting all ships by player(s)
 
+
 def welcome(board):
     draw_board(board)
-    print("Put your 3 single ships on the board")
-    i = 1
-    while i in range(0, 3):
+    print("Put your 4 single ships on the board")
+    a = 0
+    while i in range(0, 4):
         phase_one(board)
-        i = i+1
-    # print("Put 2 double ships on the board")
-    # k = 1
-    # while k in range(0, 3):
-    #     phase_double(board)
-    #     k = k+1
-    # print("Put 1 triple ship on the board")
-    # l = 1
-    # while l in range(0, 2):
-    #     phase_triple(board)
-    #     l = l+1
-    # os.system('clear')
-    # print("\033[8;15HThose are your ships:")
-    # draw_board(board)
+        a += 1
+    print("Put 3 double ships on the board")
+    b = 0
+    while k in range(0, 3):
+        phase_double(board)
+        b += 1
+    print("Put 1 triple ship on the board")
+    c = 0
+    while l in range(0, 1):
+        phase_triple(board)
+        c += 1
+    os.system('clear')
+    print("\033[8;15HThose are your ships:")
+    draw_board(board)
 
 # ending when two players play
+
 
 def ending():
     print("\033[8;15H")
@@ -389,6 +403,7 @@ def ending():
 
 # ending for human and computer
 
+
 def ending_comp():
     print("\033[8;15H")
     print("Battle finished!")
@@ -400,6 +415,8 @@ def ending_comp():
         print(player_one, ", you won!")
 
 # gameplay for two players
+
+
 def gameplay():
     j = 1
     while j in range(0, 100):     # comparing boards - condition to end the battle
@@ -413,6 +430,8 @@ def gameplay():
     ending()
 
 # gameplay fo player and computer
+
+
 def gameplay_comp():
     j = 1
     while j in range(0, 100):     # comparing boards - condition to end the battle
@@ -460,11 +479,10 @@ def comp_game_mode():
     define_comp_ships(board_two)
     define_comp_doubleships(board_two)
     define_comp_tripleships(board_two)
-    input(Fore.RED + "\033[3;15HPress enter to start the battle: ")
+    input(Fore.RED + "Press enter to start the battle: ")
     print(Fore.RESET)
     os.system('clear')
     gameplay_comp()
-
 
 
 # - - - - - - - - - - - - - - - - - - gameplay
@@ -476,4 +494,3 @@ input(Fore.BLUE + "Press enter to start game".center(80))
 choice_of_enemy()
 print("Thank you for playing".center(80))
 exit()
-

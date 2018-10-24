@@ -1,19 +1,21 @@
 Instructions
 
-1.This is 2 players game mode.
+1.  This is 2 players game mode or player versus computer mode.
+    Choose by pressing adequate key.
 
-2.The aim is to shoot all the enemy's ships by guessing their coordinates.
+2.  The aim is to shoot all the enemy's ships by guessing their coordinates.
 
-3.Each player starts with placing 5 simple ships on the board. 
-  To put a ship on the board define its coordinates.
+3.  Each player starts with placing 4 one-masted, 3 two-masted and 1 three-masted ship on the board. 
+    To put a ship on the board define its coordinates. Two- and three- masted ships can be placed 
+    vertically or horizontally.
 
-4. You shoot your enemy's ships by guessing their coordinates.
+4.  You shoot your enemy's ships by guessing their coordinates.
 
-5. Players take turns to shot the ships.
+5.  Players take turns to shot the ships.
 
-6. Look at the battlefield while shooting. If you guess the same spot twice, you loose your bullet.
+6.  Look at the battlefield while shooting. If you guess the same spot twice, you loose your bullet.
 
-7. Battle ends when the entire fleet of one of the player's is sunk.
+7.  Battle ends when the entire fleet of one of the player's is sunk.
 
 
 
