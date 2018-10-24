@@ -126,7 +126,7 @@ def instructions():
 def choice_of_enemy():
     print("""You can play with computer or second player. 
     Press C to play with computer
-    Press P to play with second player""")
+    Press P to play with second player""").upper()
     game_mode = input()
     game_mode = game_mode.upper()
     if game_mode == "C":
@@ -144,10 +144,10 @@ def check_input(board):
                 print("enter valid number")
                 number = (input("1-10: "))
         print('enter a letter A-J')
-        letter = input("A-J: ")
+        letter = input("A-J: ").upper()
         while letter not in coordinates_letters:
                 print('enter valid letter A-J')
-                letter = input("A-J: ")
+                letter = input("A-J: ").upper()
         return number, letter
 
 
@@ -181,61 +181,34 @@ def define_doubleships(board):
                         board[ship_row][ship_col+2] = ship_one
 
 def define_tripleships(board):             
-    print('Enter row number 1-10')
-    ship_row_raw = (input("1-10: "))
-    while ship_row_raw not in coordinates_numbers:
-        print("enter valid number")
-        ship_row_raw = (input("1-10: "))
-    ship_row = int(ship_row_raw)*2
-    print('enter a letter A-J')
-    ship_col_raw = input("A-J: ")
-    while ship_col_raw not in coordinates_letters:
-        print('enter valid letter A-J')
-        ship_col_raw = input("A-J: ")
-    if ship_col_raw == "A":
-        ship_col_raw = 2
-    elif ship_col_raw == "B":
-        ship_col_raw = 4
-    elif ship_col_raw == "C":
-        ship_col_raw =6
-    elif ship_col_raw == "D":
-        ship_col_raw =8
-    elif ship_col_raw == "E":
-        ship_col_raw =10
-    elif ship_col_raw == "F":
-        ship_col_raw = 12
-    elif ship_col_raw == "G":
-        ship_col_raw =14
-    elif ship_col_raw == "H":
-        ship_col_raw =16
-    elif ship_col_raw == "I":
-        ship_col_raw =18
-    elif ship_col_raw == "J":
-        ship_col_raw =20
-    ship_col = int(ship_col_raw)
-    board[ship_row][ship_col] = u"\U0001F6F3"
-    draw_board(board)
-    orient = input ( "If you want a horizontal-oriented ship press 'q', if you want a vertical-oriented ship press 1: ")
-    if orient in coordinates_numbers:
-        if ship_row == 20:
-            board[ship_row-2][ship_col] = u"\U0001F6F3"
-            board[ship_row-4][ship_col] = u"\U0001F6F3"
-        elif ship_row == 18:
-            board[ship_row-2][ship_col] = u"\U0001F6F3"
-            board[ship_row+2][ship_col] = u"\U0001F6F3"
-        else:
-            board[ship_row+2][ship_col] = u"\U0001F6F3"
-            board[ship_row+4][ship_col] = u"\U0001F6F3"
-    else:
-        if ship_col ==20:
-            board[ship_row][ship_col-2] = u"\U0001F6F3"
-            board[ship_row][ship_col-4] = u"\U0001F6F3"
-        elif ship_col == 18:
-            board[ship_row][ship_col-2] = u"\U0001F6F3"
-            board[ship_row][ship_col+2] = u"\U0001F6F3"
-        else:
-            board[ship_row][ship_col+2] = u"\U0001F6F3"
-            board[ship_row][ship_col+4] = u"\U0001F6F3"
+        ship_row, ship_col = define_ships(board)
+        draw_board(board)
+        orient = input("""Choose orientation of three-masted ship:
+        (or it will be random)
+        (V)ertically
+        (H)orizontally: """).upper()
+        if orient not in orientation:
+                orient = random.choice(orientation)
+        if orient == 'V':
+                if ship_row == 20:
+                        board[ship_row-2][ship_col] = ship_one
+                        board[ship_row-4][ship_col] = ship_one
+                elif ship_row == 18:
+                        board[ship_row-2][ship_col] = ship_one
+                        board[ship_row+2][ship_col] = ship_one
+                else:
+                        board[ship_row][ship_col+2] = ship_one
+                        board[ship_row][ship_col+4] = ship_one
+        elif orient == "H":
+                if ship_col ==20:
+                        board[ship_row][ship_col-2] = ship_one
+                        board[ship_row][ship_col-4] = ship_one
+                elif ship_col == 18:
+                        board[ship_row][ship_col-2] = ship_one
+                        board[ship_row][ship_col+2] = ship_one
+                else:
+                        board[ship_row][ship_col+2] = ship_one
+                        board[ship_row][ship_col+4] = ship_one
 
 def phase_one(board):
     define_ships(board)               #player puts ships on the board and gets them printed -> the output is board 1 or board 2

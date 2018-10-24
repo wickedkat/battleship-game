@@ -114,6 +114,37 @@ def define_doubleships(board):             # putting ships on a board
                 else:
                         board[ship_row][ship_col+2] = ship_one
         
+def define_tripleships(board):             
+        ship_row, ship_col = define_ships(board)
+        draw_board(board)
+        orient = input("""Choose orientation of three-masted ship:
+        (or it will be random)
+        (V)ertically
+        (H)orizontally: """).upper()
+        if orient not in orientation:
+                orient = random.choice(orientation)
+        if orient == 'V':
+                if ship_row == 20:
+                        board[ship_row-2][ship_col] = ship_one
+                        board[ship_row-4][ship_col] = ship_one
+                elif ship_row == 18:
+                        board[ship_row-2][ship_col] = ship_one
+                        board[ship_row+2][ship_col] = ship_one
+                else:
+                        board[ship_row][ship_col+2] = ship_one
+                        board[ship_row][ship_col+4] = ship_one
+        elif orient == "H":
+                if ship_col ==20:
+                        board[ship_row][ship_col-2] = ship_one
+                        board[ship_row][ship_col-4] = ship_one
+                elif ship_col == 18:
+                        board[ship_row][ship_col-2] = ship_one
+                        board[ship_row][ship_col+2] = ship_one
+                else:
+                        board[ship_row][ship_col+2] = ship_one
+                        board[ship_row][ship_col+4] = ship_one
 
 define_doubleships(board_four)
+draw_board(board_four)
+define_tripleships(board_four)
 draw_board(board_four)
