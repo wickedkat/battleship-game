@@ -96,6 +96,7 @@ board_four = [[' ',' ', 'A',' ', 'B',' ', 'C',' ', 'D',' ', 'E',' ', 'F',' ', 'G
 coordinates_numbers = ['1','2','3','4','5','6','7','8','9','10']
 coordinates_letters = ['A','B','C','D','E','F','G','H','I','J']
 escape_game = ["1"]
+STATEK = u"\u26F5"
 
 
 
@@ -141,7 +142,7 @@ def define_ships(board):             # putting ships on a board
     elif ship_col_raw == "J":
         ship_col_raw =20
     ship_col = int(ship_col_raw)
-    board[ship_row][ship_col] = u"\u26F5"
+    board[ship_row][ship_col] = STATEK
 
 def define_doubleships(board):             # putting ships on a board
     print('Enter row number 1-10')
@@ -288,10 +289,10 @@ def shoot_ships(enemy_board,board):
     elif guess_ship_col_raw == "E":
         guess_ship_col_raw =10
     guess_ship_col = int(guess_ship_col_raw)
-    board[guess_ship_row][guess_ship_col] = u"\u26F5"
+    board[guess_ship_row][guess_ship_col] = STATEK
     os.system("clear")
 
-    if (enemy_board[guess_ship_row][guess_ship_col]) == u"\u26F5":      # marking  good shots
+    if (enemy_board[guess_ship_row][guess_ship_col]) == STATEK:      # marking  good shots
         print("You sank you enemy's ship!")
         board[guess_ship_row][guess_ship_col] = u"\u2620"
         enemy_board[guess_ship_row][guess_ship_col] = u"\u2620"
