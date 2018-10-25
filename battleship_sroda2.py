@@ -133,7 +133,12 @@ def define_ships(board):
 
 
 def define_doubleships(board):
-    ship_row, ship_col = define_ships(board)
+    number, letter = check_input(board)
+    ship_row = int(number)*2
+    for key in coordinates:
+        if letter == key:
+            ship_col = coordinates[key]
+    board[ship_row][ship_col] = ship_two
     draw_board(board)
     orient = input("""Choose orientation of two-masted ship:
         (or it will be random)
@@ -156,7 +161,12 @@ def define_doubleships(board):
 
 
 def define_tripleships(board):
-    ship_row, ship_col = define_ships(board)
+    number, letter = check_input(board)
+    ship_row = int(number)*2
+    for key in coordinates:
+        if letter == key:
+            ship_col = coordinates[key]
+    board[ship_row][ship_col] = ship_three
     draw_board(board)
     orient = input("""Choose orientation of three-masted ship:
         (or it will be random)
@@ -318,11 +328,11 @@ def shoot_ships(enemy_board, board):
         board[guess_ship_row][guess_ship_col] = sunk
         enemy_board[guess_ship_row][guess_ship_col] = sunk
     elif (enemy_board[guess_ship_row][guess_ship_col]) == ship_two:      # marking  good shots 2 masted
-        print("You sank you enemy's ship!")
+        print("You shoot your enemy's ship! It's a two masted")
         board[guess_ship_row][guess_ship_col] = u"\u2620"
         enemy_board[guess_ship_row][guess_ship_col] = u"\u2620"
     elif (enemy_board[guess_ship_row][guess_ship_col]) == ship_three:      # marking  good shots 3 masted
-        print("You sank you enemy's ship!")
+        print("You shoot your enemy's ship! It's a three-masted.")
         board[guess_ship_row][guess_ship_col] = sunk
         enemy_board[guess_ship_row][guess_ship_col] = sunk
     else:
@@ -341,17 +351,20 @@ def shoot_ships_comp(enemy_board, board):
         if enemy_board[guess_ship_row][guess_ship_col] == miss or enemy_board[guess_ship_row][guess_ship_col] == sunk:
             guess_ship_row = random.randrange(2, 21, 2)
             guess_ship_col = random.randrange(2, 21, 2)
+            time.sleep(1)
         else:
             if (enemy_board[guess_ship_row][guess_ship_col]) == ship_one:
                 print("I sank your ship!")
                 board[guess_ship_row][guess_ship_col] = sunk
                 enemy_board[guess_ship_row][guess_ship_col] = sunk
+                i += 1
             elif (enemy_board[guess_ship_row][guess_ship_col]) == ship_two:
-                print("I sank your ship!")
+                print("I shot your ship! It's a two-masted.")
                 board[guess_ship_row][guess_ship_col] = sunk
                 enemy_board[guess_ship_row][guess_ship_col] = sunk
+                i += 1
             elif (enemy_board[guess_ship_row][guess_ship_col]) == ship_two:
-                print("I sank your ship!")
+                print("I shot your ship! It's a three-masted.")
                 board[guess_ship_row][guess_ship_col] = sunk
                 enemy_board[guess_ship_row][guess_ship_col] = sunk
                 i += 1
@@ -365,7 +378,9 @@ def shoot_ships_comp(enemy_board, board):
 # shoot ships player one
 
 def phase_two_player_one(enemy_board, board):  # shooting - player's one turn + output
+    print(Fore.RED)
     print(player_one, ", your turn!")
+    print(Style.RESET_ALL)
     shoot_ships(board_two, board_three)
     draw_board(board)
     time.sleep(3)
@@ -375,7 +390,9 @@ def phase_two_player_one(enemy_board, board):  # shooting - player's one turn + 
 
 
 def phase_two_player_two(enemy_board, board):  # shooting - player's two turn + output
+    print(Fore.RED)
     print(player_two, ", your turn!")
+    print(Style.RESET_ALL)
     shoot_ships(board_one, board_four)
     draw_board(board)
     time.sleep(3)
@@ -385,10 +402,12 @@ def phase_two_player_two(enemy_board, board):  # shooting - player's two turn + 
 
 
 def phase_two_comp(enemy_board, board):
+    print(Fore.RED)
     print("My turn!")
+    print(Style.RESET_ALL)
     shoot_ships_comp(board_one, board_four)
     draw_board(board)
-    time.sleep(3)
+    time.sleep(2)
     os.system('clear')
 
 # putting all ships by player(s)
