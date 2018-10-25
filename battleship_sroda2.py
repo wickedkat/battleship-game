@@ -71,6 +71,7 @@ sunk = u"\u2620"
 # drawing board
 def draw_board(board):
     print(Style.BRIGHT)
+    print(Fore.BLUE)
     for s in board:
         print(*s)
     print(Style.RESET_ALL)
@@ -212,18 +213,24 @@ def define_comp_doubleships(board):
         if board[ship_row][ship_col] == ship_one or board[ship_row1][ship_col] == ship_one:
             ship_row = random.randrange(2, 19, 2)
             ship_col = random.randrange(2, 19, 2)
+        elif board[ship_row][ship_col] == ship_two or board[ship_row1][ship_col] == ship_two:
+            ship_row = random.randrange(2, 19, 2)
+            ship_col = random.randrange(2, 19, 2)
         elif board[ship_row][ship_col] == ship_one or board[ship_row][ship_col1] == ship_one:
+            ship_row = random.randrange(2, 19, 2)
+            ship_col = random.randrange(2, 19, 2)
+        elif board[ship_row][ship_col] == ship_two or board[ship_row][ship_col1] == ship_two:
             ship_row = random.randrange(2, 19, 2)
             ship_col = random.randrange(2, 19, 2)
         else:
             los = random.randint(1, 2)
             if los == 1:
-                board[ship_row][ship_col] = ship_one
-                board[ship_row][ship_col1] = ship_one
+                board[ship_row][ship_col] = ship_two
+                board[ship_row][ship_col1] = ship_two
                 i += 1
             else:
-                board[ship_row][ship_col] = ship_one
-                board[ship_row1][ship_col] = ship_one
+                board[ship_row][ship_col] = ship_two
+                board[ship_row1][ship_col] = ship_two
                 i += 1
 
 # define three-masted ships by computer
@@ -241,20 +248,32 @@ def define_comp_tripleships(board):
         if board[ship_row][ship_col] == ship_one or board[ship_row1][ship_col] == ship_one or board[ship_row2][ship_col] == ship_one:
             ship_row = random.randrange(2, 17, 2)
             ship_col = random.randrange(2, 17, 2)
+        elif board[ship_row][ship_col] == ship_two or board[ship_row1][ship_col] == ship_two or board[ship_row2][ship_col] == ship_two:
+            ship_row = random.randrange(2, 17, 2)
+            ship_col = random.randrange(2, 17, 2)
+        elif board[ship_row][ship_col] == ship_three or board[ship_row1][ship_col] == ship_three or board[ship_row2][ship_col] == ship_three:
+            ship_row = random.randrange(2, 17, 2)
+            ship_col = random.randrange(2, 17, 2)
         elif board[ship_row][ship_col] == ship_one or board[ship_row][ship_col1] == ship_one or board[ship_row][ship_col2] == ship_one:
+            ship_row = random.randrange(2, 17, 2)
+            ship_col = random.randrange(2, 17, 2)
+        elif board[ship_row][ship_col] == ship_two or board[ship_row][ship_col1] == ship_two or board[ship_row][ship_col2] == ship_two:
+            ship_row = random.randrange(2, 17, 2)
+            ship_col = random.randrange(2, 17, 2)
+        elif board[ship_row][ship_col] == ship_three or board[ship_row][ship_col1] == ship_three or board[ship_row][ship_col2] == ship_three:
             ship_row = random.randrange(2, 17, 2)
             ship_col = random.randrange(2, 17, 2)
         else:
             los = random.randint(1, 2)
             if los == 1:
-                board[ship_row][ship_col] = ship_one
-                board[ship_row1][ship_col] = ship_one
-                board[ship_row2][ship_col] = ship_one
+                board[ship_row][ship_col] = ship_three
+                board[ship_row1][ship_col] = ship_three
+                board[ship_row2][ship_col] = ship_three
                 i += 1
             else:
-                board[ship_row][ship_col] = ship_one
-                board[ship_row][ship_col1] = ship_one
-                board[ship_row][ship_col2] = ship_one
+                board[ship_row][ship_col] = ship_three
+                board[ship_row][ship_col1] = ship_three
+                board[ship_row][ship_col2] = ship_three
                 i += 1
 
 # player puts one-masted ships on the board and gets them printed -> the output is board 1 or board 2
@@ -298,14 +317,14 @@ def shoot_ships(enemy_board, board):
         print("You sank you enemy's ship!")
         board[guess_ship_row][guess_ship_col] = sunk
         enemy_board[guess_ship_row][guess_ship_col] = sunk
-    elif (enemy_board[guess_ship_row][guess_ship_col]) == u"\U0001F6E5":      # marking  good shots
+    elif (enemy_board[guess_ship_row][guess_ship_col]) == ship_two:      # marking  good shots 2 masted
         print("You sank you enemy's ship!")
         board[guess_ship_row][guess_ship_col] = u"\u2620"
         enemy_board[guess_ship_row][guess_ship_col] = u"\u2620"
-    elif (enemy_board[guess_ship_row][guess_ship_col]) == u"\U0001F6F3":      # marking  good shots
+    elif (enemy_board[guess_ship_row][guess_ship_col]) == ship_three:      # marking  good shots 3 masted
         print("You sank you enemy's ship!")
-        board[guess_ship_row][guess_ship_col] = u"\u2620"
-        enemy_board[guess_ship_row][guess_ship_col] = u"\u2620"
+        board[guess_ship_row][guess_ship_col] = sunk
+        enemy_board[guess_ship_row][guess_ship_col] = sunk
     else:
         print("You missed!")                                 # marking missed shots
         board[guess_ship_row][guess_ship_col] = miss
@@ -324,6 +343,14 @@ def shoot_ships_comp(enemy_board, board):
             guess_ship_col = random.randrange(2, 21, 2)
         else:
             if (enemy_board[guess_ship_row][guess_ship_col]) == ship_one:
+                print("I sank your ship!")
+                board[guess_ship_row][guess_ship_col] = sunk
+                enemy_board[guess_ship_row][guess_ship_col] = sunk
+            elif (enemy_board[guess_ship_row][guess_ship_col]) == ship_two:
+                print("I sank your ship!")
+                board[guess_ship_row][guess_ship_col] = sunk
+                enemy_board[guess_ship_row][guess_ship_col] = sunk
+            elif (enemy_board[guess_ship_row][guess_ship_col]) == ship_two:
                 print("I sank your ship!")
                 board[guess_ship_row][guess_ship_col] = sunk
                 enemy_board[guess_ship_row][guess_ship_col] = sunk
@@ -371,17 +398,17 @@ def welcome(board):
     draw_board(board)
     print("Put your 4 single ships on the board")
     a = 0
-    while i in range(0, 4):
+    while a in range(0, 4):
         phase_one(board)
         a += 1
     print("Put 3 double ships on the board")
     b = 0
-    while k in range(0, 3):
+    while b in range(0, 3):
         phase_double(board)
         b += 1
     print("Put 1 triple ship on the board")
     c = 0
-    while l in range(0, 1):
+    while c in range(0, 1):
         phase_triple(board)
         c += 1
     os.system('clear')
