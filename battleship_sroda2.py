@@ -126,10 +126,14 @@ def define_ships(board):
     for key in coordinates:
         if letter == key:
             ship_col = coordinates[key]
+    if board[ship_row][ship_col] != " ":
+        print("You already have a ship there :")
+        define_ships(board)
     board[ship_row][ship_col] = ship_one
     return ship_row, ship_col
 
 # define the two-masted ship (player)
+
 
 
 def define_doubleships(board):
@@ -198,6 +202,7 @@ def define_tripleships(board):
 # define one-masted ships by computer
 
 
+
 def define_comp_ships(board):
     i = 0
     while i < 4:
@@ -211,7 +216,6 @@ def define_comp_ships(board):
             i += 1
 
 # define two-masted ships by computer
-
 
 def define_comp_doubleships(board):
     i = 0
