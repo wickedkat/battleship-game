@@ -142,6 +142,9 @@ def define_doubleships(board):
     for key in coordinates:
         if letter == key:
             ship_col = coordinates[key]
+    if board[ship_row][ship_col] != " ":
+        print("You already have a ship there :")
+        define_ships(board)
     board[ship_row][ship_col] = ship_two
     draw_board(board)
     orient = input("""Choose orientation of two-masted ship:
@@ -170,6 +173,9 @@ def define_tripleships(board):
     for key in coordinates:
         if letter == key:
             ship_col = coordinates[key]
+    if board[ship_row][ship_col] != " ":
+        print("You already have a ship there :")
+        define_ships(board)
     board[ship_row][ship_col] = ship_three
     draw_board(board)
     orient = input("""Choose orientation of three-masted ship:
@@ -224,16 +230,10 @@ def define_comp_doubleships(board):
         ship_col = random.randrange(2, 19, 2)
         ship_row1 = ship_row + 2
         ship_col1 = ship_col + 2
-        if board[ship_row][ship_col] == ship_one or board[ship_row1][ship_col] == ship_one:
+        if board[ship_row][ship_col] != " " or board[ship_row1][ship_col] != " ":
             ship_row = random.randrange(2, 19, 2)
             ship_col = random.randrange(2, 19, 2)
-        elif board[ship_row][ship_col] == ship_two or board[ship_row1][ship_col] == ship_two:
-            ship_row = random.randrange(2, 19, 2)
-            ship_col = random.randrange(2, 19, 2)
-        elif board[ship_row][ship_col] == ship_one or board[ship_row][ship_col1] == ship_one:
-            ship_row = random.randrange(2, 19, 2)
-            ship_col = random.randrange(2, 19, 2)
-        elif board[ship_row][ship_col] == ship_two or board[ship_row][ship_col1] == ship_two:
+        elif board[ship_row][ship_col] != " " or board[ship_row][ship_col1] != " ":
             ship_row = random.randrange(2, 19, 2)
             ship_col = random.randrange(2, 19, 2)
         else:
@@ -259,22 +259,10 @@ def define_comp_tripleships(board):
         ship_col1 = ship_col + 2
         ship_row2 = ship_row + 4
         ship_col2 = ship_col + 4
-        if board[ship_row][ship_col] == ship_one or board[ship_row1][ship_col] == ship_one or board[ship_row2][ship_col] == ship_one:
+        if board[ship_row][ship_col] == ship_one or board[ship_row1][ship_col] != " " or board[ship_row2][ship_col] != " ":
             ship_row = random.randrange(2, 17, 2)
             ship_col = random.randrange(2, 17, 2)
-        elif board[ship_row][ship_col] == ship_two or board[ship_row1][ship_col] == ship_two or board[ship_row2][ship_col] == ship_two:
-            ship_row = random.randrange(2, 17, 2)
-            ship_col = random.randrange(2, 17, 2)
-        elif board[ship_row][ship_col] == ship_three or board[ship_row1][ship_col] == ship_three or board[ship_row2][ship_col] == ship_three:
-            ship_row = random.randrange(2, 17, 2)
-            ship_col = random.randrange(2, 17, 2)
-        elif board[ship_row][ship_col] == ship_one or board[ship_row][ship_col1] == ship_one or board[ship_row][ship_col2] == ship_one:
-            ship_row = random.randrange(2, 17, 2)
-            ship_col = random.randrange(2, 17, 2)
-        elif board[ship_row][ship_col] == ship_two or board[ship_row][ship_col1] == ship_two or board[ship_row][ship_col2] == ship_two:
-            ship_row = random.randrange(2, 17, 2)
-            ship_col = random.randrange(2, 17, 2)
-        elif board[ship_row][ship_col] == ship_three or board[ship_row][ship_col1] == ship_three or board[ship_row][ship_col2] == ship_three:
+        elif board[ship_row][ship_col] == ship_one or board[ship_row][ship_col1] != " " or board[ship_row][ship_col2] != " ":
             ship_row = random.randrange(2, 17, 2)
             ship_col = random.randrange(2, 17, 2)
         else:
