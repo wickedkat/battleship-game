@@ -142,14 +142,14 @@ def define_doubleships(board):
         orient = random.choice(orientation)
     if orient == "V":
         if ship_row == 20:
-            board[ship_row-2][ship_col] = ship_one
+            board[ship_row-2][ship_col] = ship_two
         else:
-            board[ship_row+2][ship_col] = ship_one
+            board[ship_row+2][ship_col] = ship_two
     elif orient == "H":
         if ship_col == 20:
-            board[ship_row][ship_col-2] = ship_one
+            board[ship_row][ship_col-2] = ship_two
         else:
-            board[ship_row][ship_col+2] = ship_one
+            board[ship_row][ship_col+2] = ship_two
 
 # define the three-masted ship (player)
 
@@ -165,24 +165,24 @@ def define_tripleships(board):
         orient = random.choice(orientation)
     if orient == 'V':
         if ship_row == 20:
-            board[ship_row-2][ship_col] = ship_one
-            board[ship_row-4][ship_col] = ship_one
+            board[ship_row-2][ship_col] = ship_three
+            board[ship_row-4][ship_col] = ship_three
         elif ship_row == 18:
-            board[ship_row-2][ship_col] = ship_one
-            board[ship_row+2][ship_col] = ship_one
+            board[ship_row-2][ship_col] = ship_three
+            board[ship_row+2][ship_col] = ship_three
         else:
-            board[ship_row][ship_col+2] = ship_one
-            board[ship_row][ship_col+4] = ship_one
+            board[ship_row][ship_col+2] = ship_three
+            board[ship_row][ship_col+4] = ship_three
     elif orient == "H":
         if ship_col == 20:
-            board[ship_row][ship_col-2] = ship_one
-            board[ship_row][ship_col-4] = ship_one
+            board[ship_row][ship_col-2] = ship_three
+            board[ship_row][ship_col-4] = ship_three
         elif ship_col == 18:
-            board[ship_row][ship_col-2] = ship_one
-            board[ship_row][ship_col+2] = ship_one
+            board[ship_row][ship_col-2] = ship_three
+            board[ship_row][ship_col+2] = ship_three
         else:
-            board[ship_row][ship_col+2] = ship_one
-            board[ship_row][ship_col+4] = ship_one
+            board[ship_row][ship_col+2] = ship_three
+            board[ship_row][ship_col+4] = ship_three
 
 # define one-masted ships by computer
 
